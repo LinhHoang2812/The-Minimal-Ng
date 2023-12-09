@@ -1,0 +1,108 @@
+<div class="cart">
+  <div class="cart-left">
+    <div class="container" *ngIf="!cartList || cartList?.length === 0">
+      <img
+        src="https://sheinsz.ltwebstatic.com/she_dist/images/cart/sui_img_empty_cart%20-2164551cbe.png"
+      />
+      <h5 class="title">Your cart is empty</h5>
+      <button
+        type="button"
+        class="view-btn"
+        routerLink="/products"
+        [queryParams]="{ category: 'total' }"
+      >
+        Buy now
+      </button>
+    </div>
+
+    <ng-container>
+      <app-cart-item
+        *ngFor="let item of cartList"
+        [cart_id]="item.id"
+        [id]="item.product_id"
+        [size]="item.size"
+        [color]="item.color"
+        [quantity]="item.quantity"
+      ></app-cart-item>
+    </ng-container>
+  </div>
+
+  <div class="cart-right" *ngIf="!mdScreen">
+    <div class="orders">
+      <h5 class="title">Orders Summary</h5>
+      <p class="total-price">
+        {{ firebaseAuth.totalPrice | currency : "EUR" : "symbol" }}
+      </p>
+      <button
+        [disabled]="cartList?.length === 0"
+        type="button"
+        class="order-btn"
+        routerLink="/cart/checkout"
+        (click)="goToCheckOut()"
+      >
+        Checkout now
+        {{
+          firebaseAuth.totalQuantity !== 0
+            ? "(" + firebaseAuth.totalQuantity + ")"
+            : ""
+        }}
+      </button>
+    </div>
+    <div class="cards">
+      <h5>We accept</h5>
+      <div class="cards-container">
+        <img
+          src="https://img.ltwebstatic.com/images3_pi/2021/03/09/161528368123dd7a35ad8708b0dfc74b3630526891.png"
+        />
+        <img
+          src="https://img.ltwebstatic.com/images2_pi/2018/06/06/15282732803587566708.png"
+        />
+        <img
+          src="https://img.ltwebstatic.com/images2_pi/2018/06/06/1528273241354964734.png"
+        />
+        <img
+          src="https://img.ltwebstatic.com/images2_pi/2018/06/06/1528273036537082707.png"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" *ngIf="screen.isEditProductForm && !mdScreen">
+  <section
+    *ngIf="screen.isEditProductForm"
+    class="product-section"
+    (click)="setSizeMenu($event)"
+  >
+    <span
+      class="material-symbols-outlined close"
+      (click)="screen.isEditProductForm = false"
+    >
+      close
+    </span>
+    <div class="single-product">
+      <app-product-photos></app-product-photos>
+      <app-product-info [id]="firebaseAuth.productFormId"></app-product-info>
+    </div>
+  </section>
+</div>
+
+<div class="orders-small" *ngIf="mdScreen">
+  <p class="total-price">
+    {{ firebaseAuth.totalPrice | currency : "EUR" : "symbol" }}
+  </p>
+  <button
+    [disabled]="cartList?.length === 0"
+    type="button"
+    class="order-btn"
+    routerLink="/cart/checkout"
+    (click)="goToCheckOut()"
+  >
+    Checkout now
+    {{
+      firebaseAuth.totalQuantity !== 0
+        ? "(" + firebaseAuth.totalQuantity + ")"
+        : ""
+    }}
+  </button>
+</div>

@@ -1,0 +1,24 @@
+<div class="product-info">
+  <app-product-detail [id]="id"></app-product-detail>
+  <mat-divider class="divider"></mat-divider>
+  <app-product-form [id]="id"></app-product-form>
+
+  <mat-divider *ngIf="!screen.isEditProductForm" class="divider"></mat-divider>
+
+  <div
+    *ngIf="!screen.isOpenProductForm && !screen.isEditProductForm"
+    class="shipping-info"
+  >
+    <p>Shipping Fee</p>
+    <p>Purchase Over €500 For Free Shipping</p>
+  </div>
+
+  <div *ngIf="screen.isOpenProductForm" class="more-detail">
+    <p
+      [routerLink]="['/products', id]"
+      (click)="screen.isOpenProductForm = false"
+    >
+      Read all detail
+    </p>
+  </div>
+</div>

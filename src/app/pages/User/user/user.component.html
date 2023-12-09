@@ -1,0 +1,27 @@
+<section class="user">
+  <aside *ngIf="!mdScreen">
+    <p
+      routerLink="/user"
+      [ngClass]="location.isCurrentPathEqualTo('/user') ? 'active' : ''"
+    >
+      Your Account
+    </p>
+    <p
+      routerLink="/user/wishlist"
+      [ngClass]="
+        location.isCurrentPathEqualTo('/user/wishlist') ? 'active' : ''
+      "
+    >
+      Your Wishlist
+    </p>
+    <p
+      routerLink="/user/order"
+      [ngClass]="location.isCurrentPathEqualTo('/user/order') ? 'active' : ''"
+    >
+      Your Orders
+    </p>
+  </aside>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+</section>

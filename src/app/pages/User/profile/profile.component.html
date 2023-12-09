@@ -1,0 +1,37 @@
+<h5>Welcome {{ name | uppercase }}!</h5>
+<div class="user-container">
+  <div class="conatainer">
+    <p class="title">Your email</p>
+    <p>{{ email }}</p>
+  </div>
+  <div class="container">
+    <p class="title">Shipping Adress</p>
+    <div *ngIf="!auth.addressInfo.value" class="address">
+      <span
+        class="material-symbols-outlined"
+        (click)="screen.isOpenAddressForm = true"
+      >
+        add_circle
+      </span>
+    </div>
+    <div class="address-info" *ngIf="auth.addressInfo.value">
+      <div>
+        <p>
+          {{ auth.addressInfo.value.name }}
+          {{ auth.addressInfo.value.lastName }}
+          {{ auth.addressInfo.value.phone }}
+        </p>
+        <p>{{ auth.addressInfo.value.address }}</p>
+        <p>
+          {{ auth.addressInfo.value.city }}
+          {{ auth.addressInfo.value.country }}
+        </p>
+      </div>
+      <button class="edit-btn" (click)="screen.isOpenAddressForm = true">
+        {{ mdScreen ? "Edit " : "Edit Address" }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<app-address *ngIf="screen.isOpenAddressForm"></app-address>

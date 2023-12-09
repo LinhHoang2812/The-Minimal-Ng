@@ -1,0 +1,30 @@
+.cart-section {
+  padding: 4rem;
+  background-color: rgb(250, 250, 250);
+  /* background-color: gray; */
+}
+.top {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.top-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  padding-bottom: 2rem;
+}
+.top-content {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.top-content:focus {
+  outline: none;
+}
+@media screen and (max-width: 768px) {
+  .cart-section {
+    padding: 1rem 0.5rem;
+  }
+}

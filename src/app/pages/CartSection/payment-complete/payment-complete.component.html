@@ -1,0 +1,15 @@
+<div class="container">
+  <span class="material-symbols-outlined success"> task_alt </span>
+  <h5 class="title">Your payment is complete</h5>
+  <button
+    type="button"
+    class="view-btn"
+    routerLink="/products"
+    [queryParams]="{ category: 'total' }"
+  >
+    Buy again
+  </button>
+  <button type="button" class="view-btn" routerLink="/user/order">
+    Track order
+  </button>
+</div>

@@ -1,0 +1,50 @@
+<div class="cart-section">
+  <div class="top" *ngIf="!mdScreen">
+    <div class="top-container">
+      <div class="top-content" routerLink="/cart">
+        <span
+          [ngStyle]="{
+            fontWeight: location.isCurrentPathEqualTo('/cart') ? 'bold' : '400'
+          }"
+          >Cart</span
+        >
+        <span class="material-symbols-outlined"> navigate_next </span>
+      </div>
+      <div class="top-content">
+        <span
+          [ngStyle]="{
+            fontWeight: location.isCurrentPathEqualTo('/cart/checkout')
+              ? 'bold'
+              : '400'
+          }"
+          >Order</span
+        >
+        <span class="material-symbols-outlined"> navigate_next </span>
+      </div>
+      <div class="top-content">
+        <span
+          [ngStyle]="{
+            fontWeight: location.isCurrentPathEqualTo('/cart/payment')
+              ? 'bold'
+              : '400'
+          }"
+          >Payment</span
+        >
+        <span class="material-symbols-outlined"> navigate_next </span>
+      </div>
+      <div class="top-content">
+        <span
+          [ngStyle]="{
+            fontWeight: location.isCurrentPathEqualTo('/cart/complete')
+              ? 'bold'
+              : '400'
+          }"
+        >
+          Order Complete</span
+        >
+        <span class="material-symbols-outlined"> navigate_next </span>
+      </div>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>

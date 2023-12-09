@@ -1,0 +1,145 @@
+<section class="checkout">
+  <div class="checkout-left">
+    <div class="container">
+      <h5 class="title">Shipping Adress</h5>
+      <div *ngIf="!auth.addressInfo.value" class="address">
+        <span
+          class="material-symbols-outlined"
+          (click)="screen.isOpenAddressForm = true"
+        >
+          add_circle
+        </span>
+      </div>
+      <div class="address-info" *ngIf="auth.addressInfo.value">
+        <div>
+          <p>
+            {{ auth.addressInfo.value.name }}
+            {{ auth.addressInfo.value.lastName }}
+            {{ auth.addressInfo.value.phone }}
+          </p>
+          <p>{{ auth.addressInfo.value.address }}</p>
+          <p>
+            {{ auth.addressInfo.value.city }}
+            {{ auth.addressInfo.value.country }}
+          </p>
+        </div>
+        <button class="edit-btn" (click)="screen.isOpenAddressForm = true">
+          {{ mdScreen ? "Edit " : "Edit Address" }}
+        </button>
+      </div>
+    </div>
+    <div class="container">
+      <h5 class="title">Order Detail</h5>
+      <div class="order-detail">
+        <app-mini-cart-item
+          *ngFor="let item of cartList"
+          [id]="item.product_id"
+          [finalPrice]="item.finalPrice"
+          [quantity]="item.quantity"
+        ></app-mini-cart-item>
+      </div>
+      <h5 class="title">Your Shipping Choice</h5>
+      <ul
+        cdkListbox
+        aria-labelledby="menu-label"
+        class="menu-listbox"
+        name="shipping"
+      >
+        <li
+          *ngFor="let item of shippingOptions"
+          [cdkOption]="item"
+          class="menu-option"
+          (click)="firebaseAuth.shippingSelected = item"
+          [ngStyle]="{
+            border:
+              item.name === firebaseAuth.shippingSelected.name
+                ? 'solid 1px black'
+                : 'none'
+          }"
+        >
+          <app-cart-select
+            [name]="item.name"
+            [price]="item.price"
+            [des]="item.des"
+          ></app-cart-select>
+        </li>
+      </ul>
+    </div>
+    <div class="container">
+      <h5 class="title">Payment method</h5>
+      <ul
+        cdkListbox
+        aria-labelledby="menu-label"
+        class="menu-listbox"
+        name="shipping"
+      >
+        <li
+          *ngFor="let item of paymentOptions"
+          [cdkOption]="item"
+          class="menu-option"
+          (click)="firebaseAuth.paymentSelected = item"
+          [ngStyle]="{
+            border:
+              item.name === firebaseAuth.paymentSelected.name
+                ? 'solid 1px black'
+                : 'none'
+          }"
+        >
+          <app-cart-select
+            [name]="item.name"
+            [img]="item.img"
+          ></app-cart-select>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="checkout-right">
+    <div class="checkout-order">
+      <h5 class="title">Orders Summary</h5>
+      <div class="price">
+        <p>Original Price:</p>
+        <p>{{ firebaseAuth.totalPrice | currency : "EUR" : "symbol" }}</p>
+      </div>
+      <div class="price">
+        <p>Shipping Price:</p>
+        <p>
+          {{
+            firebaseAuth.shippingSelected.price | currency : "EUR" : "symbol"
+          }}
+        </p>
+      </div>
+      <div class="price">
+        <p>Total Price:</p>
+        <p style="color: red; font-weight: bold; margin-bottom: 2rem">
+          {{
+            firebaseAuth.totalPrice + firebaseAuth.shippingSelected.price
+              | currency : "EUR" : "symbol"
+          }}
+        </p>
+      </div>
+
+      <button
+        type="button"
+        class="order-btn"
+        routerLink="/cart/payment"
+        *ngIf="!mdScreen"
+      >
+        Pay Now
+      </button>
+    </div>
+  </div>
+</section>
+<app-address *ngIf="screen.isOpenAddressForm"></app-address>
+
+<!-- [(ngModel)]="firebaseAuth.shippingOption" -->
+<div class="orders-small" *ngIf="mdScreen">
+  <p class="total-price">
+    {{
+      firebaseAuth.totalPrice + firebaseAuth.shippingSelected.price
+        | currency : "EUR" : "symbol"
+    }}
+  </p>
+  <button type="button" class="order-btn" routerLink="/cart/payment">
+    Pay Now
+  </button>
+</div>

@@ -1,0 +1,41 @@
+<div class="photos">
+  <div *ngIf="!mdScreen" class="all-photos">
+    <div
+      *ngFor="let image of images; index as i"
+      class="img"
+      [ngClass]="image === mainImg ? 'active' : ''"
+    >
+      <img
+        [src]="image"
+        (click)="slick.slickGoTo(i)"
+        (click)="setMainImg(image)"
+      />
+    </div>
+  </div>
+  <div
+    class="main-photo"
+    [ngClass]="
+      (screen.isOpenProductForm || screen.isEditProductForm) && !mdScreen
+        ? 'product-form'
+        : ''
+    "
+  >
+    <!-- <img [src]="mainImg | async" /> -->
+    <button type="button" class="prev-slick" (click)="slick.slickPrev()">
+      <span class="material-symbols-outlined"> navigate_before </span>
+    </button>
+    <button type="button" class="next-slick" (click)="slick.slickNext()">
+      <span class="material-symbols-outlined"> navigate_next </span>
+    </button>
+    <ngx-slick-carousel
+      #slick
+      class="carousel-slick"
+      [config]="slideConfig"
+      (afterChange)="Change($event)"
+    >
+      <div ngxSlickItem *ngFor="let img of images" class="slide">
+        <img [src]="img" />
+      </div>
+    </ngx-slick-carousel>
+  </div>
+</div>

@@ -1,0 +1,121 @@
+.new-arrival {
+  padding-top: 900px;
+  background: linear-gradient(rgb(243, 243, 243), rgb(243, 243, 243))
+    content-box;
+  display: flex;
+  gap: 2rem;
+}
+.new-products-categories {
+  padding-left: 2rem;
+  padding-top: 4rem;
+  display: flex;
+  flex-direction: column;
+}
+.title {
+  font-weight: 600;
+  font-size: 20px;
+  /* font-family: Tenor Sans;
+  font-style: normal; */
+}
+.categories {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.categories a {
+  text-decoration: none;
+  cursor: pointer;
+  color: #202224;
+  font-family: Tenor Sans;
+  font-size: 16px;
+  font-style: normal;
+  line-height: 24px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.active-category {
+  font-weight: 600;
+}
+
+.new-products-slick {
+  padding: 2rem 2rem;
+  position: relative;
+  width: 85%;
+  box-sizing: border-box;
+}
+::ng-deep .carousel-slick {
+  padding: 1rem;
+}
+.next-slick,
+.prev-slick {
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  top: 30%;
+  z-index: 99;
+}
+.prev-slick {
+  left: 0;
+}
+.next-slick {
+  right: 0;
+}
+button ::ng-deep .material-symbols-outlined {
+  font-size: 50px;
+  font-weight: 200;
+}
+::ng-deep .slide:focus {
+  outline: none;
+}
+.slide-article {
+  margin: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.slide-article img {
+  height: 230px;
+}
+
+.slide-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 16px;
+}
+.name {
+  cursor: pointer;
+}
+.name:focus {
+  outline: none;
+}
+.price {
+  font-weight: 600;
+  margin-top: 0;
+  padding-top: 0;
+}
+@media screen and (max-width: 1024px) {
+  .new-products-slick {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .new-arrival {
+    padding-top: 500px;
+    display: block;
+  }
+  .new-products-slick {
+    width: 100%;
+    padding: 0 1rem;
+  }
+  .prev-slick,
+  .next-slick {
+    display: none;
+  }
+}

@@ -1,0 +1,27 @@
+<div class="option">
+  <span
+    class="material-symbols-outlined"
+    *ngIf="
+      name !== firebaseAuth.shippingSelected.name &&
+      name !== firebaseAuth.paymentSelected.name
+    "
+  >
+    radio_button_unchecked
+  </span>
+  <span
+    class="material-symbols-outlined"
+    *ngIf="
+      name === firebaseAuth.shippingSelected.name ||
+      name === firebaseAuth.paymentSelected.name
+    "
+  >
+    radio_button_checked
+  </span>
+  <div>
+    <p class="name">{{ name }}</p>
+    <p *ngIf="des" class="des">
+      <span>{{ price | currency : "EUR" : "symbol" }}</span> ({{ des }})
+    </p>
+    <img class="img" *ngIf="img" [src]="img" />
+  </div>
+</div>

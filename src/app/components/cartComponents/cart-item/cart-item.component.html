@@ -1,0 +1,60 @@
+<article class="cart-item">
+  <div class="cart-img">
+    <img [src]="image" />
+  </div>
+
+  <div class="cart-info">
+    <p class="name">{{ name }}</p>
+    <div class="btn" (click)="openEditForm()">
+      <div
+        *ngIf="color"
+        class="color"
+        [ngStyle]="{ backgroundColor: color.replace(' ', '') }"
+      ></div>
+      <span class="color-size"> {{ color }}/{{ size }} </span>
+      <span class="material-symbols-outlined"> expand_more </span>
+    </div>
+    <div class="bottom-info">
+      <p class="price" [ngClass]="sale ? 'sale' : ''">
+        <span *ngIf="sale">{{ salePrice | currency : "EUR" : "symbol" }}</span>
+        <span>
+          {{ price | currency : "EUR" : "symbol" }}
+        </span>
+      </p>
+      <div class="btn-container">
+        <div class="quantity">
+          <div class="minus">
+            <span class="material-symbols-outlined" (click)="remove()">
+              remove
+            </span>
+          </div>
+          <div class="input">
+            <input
+              type="text"
+              name="quantity"
+              disabled
+              [(ngModel)]="quantity"
+            />
+          </div>
+          <div class="plus">
+            <span class="material-symbols-outlined" (click)="add()"> add </span>
+          </div>
+        </div>
+        <span
+          class="material-symbols-outlined"
+          matTooltip="Are you sure you want to move this item to favorite?"
+          (click)="movetoFavorite()"
+        >
+          favorite
+        </span>
+        <span
+          class="material-symbols-outlined"
+          matTooltip="Are you sure you want to delete this item?"
+          (click)="removeCart()"
+        >
+          delete
+        </span>
+      </div>
+    </div>
+  </div>
+</article>

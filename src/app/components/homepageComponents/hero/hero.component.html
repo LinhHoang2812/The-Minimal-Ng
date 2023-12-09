@@ -1,0 +1,33 @@
+<section class="hero">
+  <c-carousel [interval]="5000" class="carousel">
+    <c-carousel-inner class="carousel-inner">
+      <c-carousel-item
+        *ngFor="let slide of sliders; index as i"
+        class="carousel-item"
+        [ngClass]="i.toString()"
+      >
+        <img
+          [src]="slide.src"
+          class="slide-img"
+          [ngClass]="i.toString()"
+          appTextAnimation
+        />
+        <c-carousel-caption class="d-none d-md-block">
+          <h3>{{ slide.title }}</h3>
+          <p>{{ slide.des }}</p>
+        </c-carousel-caption>
+      </c-carousel-item>
+    </c-carousel-inner>
+    <c-carousel-control
+      [routerLink]
+      caption="Previous"
+      direction="prev"
+      class="prev"
+    ></c-carousel-control>
+    <c-carousel-control
+      [routerLink]
+      caption="Next"
+      direction="next"
+    ></c-carousel-control>
+  </c-carousel>
+</section>

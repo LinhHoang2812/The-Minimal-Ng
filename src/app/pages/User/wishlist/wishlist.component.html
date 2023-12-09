@@ -1,0 +1,38 @@
+<section class="wishlist-container">
+  <h5 *ngIf="favoriteItems" class="title">Your Favorite Products</h5>
+  <div class="wishlist" *ngIf="favoriteItems">
+    <app-wishlist-item
+      *ngFor="let item of favoriteItems"
+      [id]="item.product_id"
+      [favorite_id]="item.id"
+    ></app-wishlist-item>
+  </div>
+  <div class="empty-list">
+    <h5 *ngIf="!favoriteItems" class="title">Your wishlist is empty</h5>
+    <div
+      [routerLink]="['/products']"
+      [queryParams]="{ category: 'total' }"
+      class="view-products"
+    >
+      View products
+    </div>
+  </div>
+</section>
+<div class="overlay" *ngIf="screen.isOpenProductForm">
+  <section
+    *ngIf="screen.isOpenProductForm"
+    class="product-section"
+    (click)="setSizeMenu($event)"
+  >
+    <span
+      class="material-symbols-outlined close"
+      (click)="screen.isOpenProductForm = false"
+    >
+      close
+    </span>
+    <div class="single-product">
+      <app-product-photos></app-product-photos>
+      <app-product-info [id]="firebaseAuth.productFormId"></app-product-info>
+    </div>
+  </section>
+</div>

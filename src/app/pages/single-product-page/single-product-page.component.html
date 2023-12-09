@@ -1,0 +1,10 @@
+<section class="product-section" (click)="setSizeMenu($event)">
+  <div class="single-product">
+    <app-product-photos [id]="id"></app-product-photos>
+    <app-product-info [id]="id"></app-product-info>
+  </div>
+
+  <app-product-tab [id]="id"></app-product-tab>
+  <app-similar-products [id]="id"></app-similar-products>
+</section>
+<!-- <app-similar-products [id]="id"></app-similar-products> -->

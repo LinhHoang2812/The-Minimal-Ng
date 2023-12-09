@@ -1,0 +1,40 @@
+<section class="suggest">
+  <h5>Just for you</h5>
+  <mat-divider class="divider"></mat-divider>
+  <div class="suggest-products-slick">
+    <button type="button" class="prev-slick" (click)="slick.slickPrev()">
+      <span class="material-symbols-outlined"> navigate_before </span>
+    </button>
+    <button type="button" class="next-slick" (click)="slick.slickNext()">
+      <span class="material-symbols-outlined"> navigate_next </span>
+    </button>
+    <ngx-slick-carousel #slick class="carousel-slick" [config]="slideConfig">
+      <div ngxSlickItem *ngFor="let slide of suggestProducts" class="slide">
+        <article class="slide-article">
+          <img
+            src="{{
+              slide.id === activeImage ? slide.images[1] : slide.images[0]
+            }}"
+            alt=""
+            width="100%"
+            (mouseenter)="onImageHover(slide.id)"
+            (mouseleave)="onImageHover(null)"
+          />
+          <div class="slide-info">
+            <h5 class="brand">{{ slide.brand }}</h5>
+            <p class="name" [routerLink]="['/products', slide.id]">
+              {{ slide.name }}
+            </p>
+            <p class="price">
+              {{
+                slide.sale
+                  ? (slide.salePrice | currency : "EUR" : "symbol")
+                  : (slide.price | currency : "EUR" : "symbol")
+              }}
+            </p>
+          </div>
+        </article>
+      </div>
+    </ngx-slick-carousel>
+  </div>
+</section>

@@ -1,0 +1,62 @@
+<header class="header-container">
+  <div class="header">
+    <span>{{ order.createdAt | date : " dd MMMM y HH:mm:ss" }}</span>
+    <span>Order number {{ order.id }}</span>
+  </div>
+  <span
+    class="material-symbols-outlined delete-btn"
+    style="cursor: pointer"
+    (click)="deleteOrder()"
+  >
+    delete
+  </span>
+</header>
+<table class="table" *ngIf="!mdScreen">
+  <tr>
+    <th>Product</th>
+    <th>Quantity</th>
+    <th>Color</th>
+    <th>Size</th>
+    <th>Price</th>
+  </tr>
+  <tr *ngFor="let item of order.items">
+    <td><img [src]="item.img" class="img" /></td>
+    <td>{{ item.quantity }}</td>
+    <td>{{ item.color }}</td>
+    <td>{{ item.size }}</td>
+    <td>{{ item.finalPrice | currency : "EUR" : "symbol" }}</td>
+  </tr>
+  <tr>
+    <td colspan="5" style="text-align: right">
+      <p>Total price: {{ order.amount | currency : "EUR" : "symbol" }}</p>
+      <p>Status: {{ order.paid === true ? "Completed" : "Uncompleted" }}</p>
+    </td>
+  </tr>
+</table>
+
+<table *ngIf="mdScreen" class="table">
+  <tr>
+    <th>Detail</th>
+  </tr>
+  <tr *ngFor="let item of order.items">
+    <td>
+      <div class="detail-container">
+        <img [src]="item.img" class="img" />
+        <div class="detail">
+          <div>
+            <p>{{ item.color }}</p>
+            <p>{{ item.size }}</p>
+            <p>{{ item.finalPrice | currency : "EUR" : "symbol" }}</p>
+          </div>
+          <p>x{{ item.quantity }}</p>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right">
+      <p>Total price: {{ order.amount | currency : "EUR" : "symbol" }}</p>
+      <p>Status: {{ order.paid === true ? "Completed" : "Uncompleted" }}</p>
+    </td>
+  </tr>
+</table>

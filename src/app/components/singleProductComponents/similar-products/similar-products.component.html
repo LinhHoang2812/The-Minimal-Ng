@@ -1,0 +1,23 @@
+<div class="similar-products">
+  <h5>Similar Products</h5>
+  <div class="similar-products-container">
+    <article
+      *ngFor="let item of similarProducts"
+      class="product"
+      [routerLink]="['/products', item.id]"
+    >
+      <img src="{{ item.images[0] }}" alt="" />
+      <div class="info">
+        <p>{{ item.brand }}</p>
+        <p>
+          {{
+            item.sale
+              ? (item.salePrice | currency : "EUR" : "symbol")
+              : (item.price | currency : "EUR" : "symbol")
+          }}
+        </p>
+      </div>
+      <span class="sale" *ngIf="item.sale">Sale</span>
+    </article>
+  </div>
+</div>

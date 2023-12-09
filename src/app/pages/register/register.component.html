@@ -1,0 +1,53 @@
+<h2>Sign Up</h2>
+<p class="warning" *ngIf="auth.authError">{{ auth.authError }}</p>
+<form class="form" [formGroup]="form" (submit)="onSubmit()">
+  <input
+    type="text"
+    placeholder="please enter your name"
+    class="form-input"
+    name="name"
+    formControlName="name"
+  />
+  <p
+    class="warning"
+    *ngIf="!form.get('name').value && form.get('name').touched"
+  >
+    Please insert your name
+  </p>
+  <input
+    type="email"
+    placeholder="please enter your email"
+    class="form-input"
+    name="email"
+    formControlName="email"
+  />
+  <p
+    class="warning"
+    *ngIf="!form.get('email').valid && form.get('email').touched"
+  >
+    Please insert correct email
+  </p>
+  <input
+    type="password"
+    placeholder="please enter your password"
+    class="form-input"
+    name="password"
+    formControlName="password"
+  />
+  <p
+    class="warning"
+    *ngIf="!form.get('password').valid && form.get('password').touched"
+  >
+    Your password must be longer than 6 characters
+  </p>
+  <button type="submit" class="submit-btn" [disabled]="!form.valid">
+    Sign up
+  </button>
+
+  <div class="welcome">
+    <p>Welcome to the The Minimal!</p>
+    <p>Already have an account, please log in!</p>
+  </div>
+
+  <button routerLink="/login" class="submit-btn">Log in</button>
+</form>

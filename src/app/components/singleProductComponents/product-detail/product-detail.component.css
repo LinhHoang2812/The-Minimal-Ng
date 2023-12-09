@@ -1,0 +1,71 @@
+:host {
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Tenor Sans;
+  font-style: normal;
+  letter-spacing: 2px;
+}
+p {
+  margin: 0;
+}
+h5 {
+  font-size: 18px;
+  margin-top: 0;
+  letter-spacing: 2px;
+}
+.product-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.brand {
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-top: -3px;
+  margin: 0;
+}
+.name {
+  font-size: 18px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+.price {
+  font-size: 22px;
+  font-weight: bolder;
+  text-transform: capitalize;
+  margin: 0;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.sale span:nth-child(1) {
+  color: red;
+}
+.sale span:nth-child(2) {
+  color: rgb(167, 167, 167);
+  text-decoration: line-through;
+  font-size: 16px;
+}
+.sale span:nth-child(3) {
+  background-color: black;
+  color: white;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 0 5px;
+}
+
+.id {
+  color: rgb(197, 196, 196);
+  font-size: 16px;
+  margin: 0;
+}
+
+::ng-deep .material-symbols-outlined.fill {
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 16;
+}
+
+.rating {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}

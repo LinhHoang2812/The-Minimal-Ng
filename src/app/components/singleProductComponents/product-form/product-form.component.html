@@ -1,0 +1,106 @@
+<form (submit)="addCart()">
+  <div class="container">
+    <div class="color-container">
+      <p class="listbox-label">Color</p>
+      <ul
+        [(ngModel)]="colorValue"
+        cdkListbox
+        class="example-listbox"
+        name="color"
+      >
+        <li
+          *ngFor="let color of colors"
+          [cdkOption]="color"
+          class="example-option"
+          (click)="setColor(color)"
+          [ngStyle]="{ background: color.replace(' ', '') }"
+        ></li>
+      </ul>
+    </div>
+    <p class="chosen-color">{{ colorValue }}</p>
+  </div>
+  <div class="">
+    <p
+      *ngIf="!sizeValue.valid && submitTouched"
+      [ngStyle]="{ color: 'red', margin: '0' }"
+    >
+      Please choose a size
+    </p>
+    <div class="size-container">
+      <p class="menu-label">Size</p>
+      <div class="size-menu">
+        <div
+          class="menu-listbox-container"
+          [ngClass]="screen.isSizeMenuOpen === true ? 'menu-open' : ''"
+        >
+          <div class="menu-listbox-label">
+            <span>
+              {{
+                screen.isSizeMenuOpen === true
+                  ? "Select size"
+                  : sizeValue?.value
+                  ? sizeValue.value
+                  : "Select size "
+              }}
+            </span>
+            <span class="material-symbols-outlined"> expand_more </span>
+          </div>
+          <ul
+            *ngIf="screen.isSizeMenuOpen"
+            cdkListbox
+            aria-labelledby="menu-label"
+            class="menu-listbox"
+            [formControl]="sizeValue"
+            name="size"
+          >
+            <li
+              *ngFor="let size of sizes"
+              [cdkOption]="size"
+              class="menu-option"
+            >
+              {{ size }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="quantity-container">
+    <p class="quantity-label">Quantity</p>
+    <div class="quantity">
+      <div class="minus">
+        <span class="material-symbols-outlined" (click)="remove()">
+          remove
+        </span>
+      </div>
+      <div class="input">
+        <input
+          type="text"
+          name="quantity"
+          [(ngModel)]="quantityValue"
+          disabled
+        />
+      </div>
+      <div class="plus">
+        <span class="material-symbols-outlined" (click)="add()"> add </span>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!screen.isEditProductForm" class="btn-container">
+    <button type="submit" class="cart-btn" #cartBtn>Add to cart</button>
+    <div class="wish-btn" [ngClass]="isProductFavorite ? 'in-wishlist' : ''">
+      <span class="material-symbols-outlined" (click)="addWish()">
+        favorite
+      </span>
+    </div>
+  </div>
+  <div *ngIf="screen.isEditProductForm" class="btn-container">
+    <button type="button" class="cart-btn update-btn" (click)="updateCart()">
+      Update cart
+    </button>
+  </div>
+</form>
+
+<!-- [cdkListboxValue]="colorValue"
+(cdkListboxValueChange)="colorValue = $event.value" -->

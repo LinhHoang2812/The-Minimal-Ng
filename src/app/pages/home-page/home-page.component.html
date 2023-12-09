@@ -1,0 +1,120 @@
+<app-hero></app-hero>
+<app-new-arrival></app-new-arrival>
+
+<div class="explore-more">
+  <button>
+    <span>Explore More</span> <img src="../../../assets/icons/forward.svg" />
+  </button>
+</div>
+
+<section class="luxury-brands">
+  <mat-divider class="divider"></mat-divider>
+  <div class="brands">
+    <img src="../../../assets/icons/prada.svg" />
+    <img src="../../../assets/icons/burberry.svg" />
+    <img src="../../../assets/icons/boss.svg" />
+    <img src="../../../assets/icons/catier.svg" />
+    <img src="../../../assets/icons/gucci.svg" />
+    <img src="../../../assets/icons/tiffany.svg" />
+  </div>
+  <mat-divider class="divider"></mat-divider>
+</section>
+
+<section class="collections">
+  <h5>Collections</h5>
+  <div class="collection">
+    <div class="cover november">
+      <!-- <img src="../../../assets/images/cover.png" /> -->
+      <img
+        src="https://cdn-img.thehandsome.com/attachment/editor/2023/10/30/2b494771-e822-4e59-89f0-a47470be9166_10.jpg"
+      />
+      <!-- <p class="text">November Collection</p> -->
+    </div>
+
+    <div></div>
+  </div>
+  <div class="collection">
+    <div *ngIf="!mdScreen" class="text-div">
+      <p class="text">Autumn Collection</p>
+    </div>
+    <div class="cover autumn">
+      <img
+        [src]="
+          mdScreen
+            ? '../../../assets/images/autumn.png'
+            : 'https://cdn-img.thehandsome.com/attachment/editor/2023/11/03/c47c26c5-29f4-4125-926e-93574882ad3c_10.jpg'
+        "
+      />
+      <!-- <p class="text">Autumn Collection</p> -->
+    </div>
+  </div>
+</section>
+
+<app-suggest></app-suggest>
+
+<section class="trending">
+  <h5>@Trending</h5>
+  <mat-chip-listbox class="trendingbox">
+    <mat-chip>#fall</mat-chip>
+    <mat-chip>#collection</mat-chip>
+    <mat-chip>#winter</mat-chip>
+  </mat-chip-listbox>
+  <mat-chip-listbox class="trendingbox">
+    <mat-chip>#dressminimal</mat-chip>
+    <mat-chip>#autunmcollection</mat-chip>
+    <mat-chip>#minimalcloset</mat-chip>
+  </mat-chip-listbox>
+</section>
+
+<section class="info">
+  <h5>The Mininal</h5>
+  <p>
+    Making a luxurious lifestyle accessible for a generous group of women is our
+    daily drive.
+  </p>
+  <mat-divider class="divider"></mat-divider>
+  <div class="info-detail">
+    <div class="detail">
+      <img src="../../../assets/icons/sticker1.png" />
+      <p>Fast shipping. Free on orders over $25.</p>
+    </div>
+    <div class="detail">
+      <img src="../../../assets/icons/sticker2.png" />
+      <p>Sustainable process from start to finish.</p>
+    </div>
+    <div class="detail">
+      <img src="../../../assets/icons/sticker3.png" />
+      <p>Unique designs and high-quality materials.</p>
+    </div>
+    <div class="detail">
+      <img src="../../../assets/icons/sticker4.png" />
+      <p>Fast shipping. Free on orders over $25.</p>
+    </div>
+  </div>
+  <img src="../../../assets/icons/decor.svg" class="decor" />
+</section>
+
+<section class="follow">
+  <h5>Follow us</h5>
+  <mat-divider class="divider"></mat-divider>
+  <div class="follow-container">
+    <div class="insta">
+      <img src="../../../assets/images/insta1.png" />
+      <span>@mia</span>
+    </div>
+    <div class="insta">
+      <img src="../../../assets/images/insta2.png" />
+      <span>@_jihyn</span>
+    </div>
+
+    <div class="insta">
+      <img src="../../../assets/images/insta3.png" />
+      <span>@mia</span>
+    </div>
+
+    <div class="insta">
+      <img src="../../../assets/images/insta4.png" />
+      <span>@_jihyn</span>
+    </div>
+  </div>
+</section>

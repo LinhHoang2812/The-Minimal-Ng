@@ -1,0 +1,45 @@
+.container {
+  background-color: white;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  gap: 1rem;
+}
+.title {
+  font-size: 18px;
+  font-weight: bold;
+}
+.success {
+  font-size: 60px;
+  color: green;
+}
+.view-btn {
+  width: 200px;
+  height: 50px;
+  background-color: black;
+  color: white;
+  font-family: Tenor Sans;
+  font-style: normal;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  border: none;
+  cursor: pointer;
+}
+.view-btn:last-child {
+  background-color: white;
+  border: 1px solid gray;
+  color: #333;
+}
+@media screen and (max-width: 768px) {
+  .title {
+    text-align: center;
+  }
+  .view-btn {
+    width: 150px;
+    font-size: 16px;
+  }
+}

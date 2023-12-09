@@ -1,0 +1,10 @@
+<section class="orders-container">
+  <h5>Your Orders</h5>
+  <div class="orders" *ngIf="orders">
+    <app-single-order
+      *ngFor="let order of orders"
+      [order]="order"
+      (delete)="onDelete()"
+    ></app-single-order>
+  </div>
+</section>

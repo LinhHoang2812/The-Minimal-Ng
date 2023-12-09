@@ -1,0 +1,9 @@
+<div class="product">
+  <div class="img">
+    <img [src]="image" />
+    <div class="quantity">x {{ quantity }}</div>
+    <div class="sale" *ngIf="salePercent">{{ -salePercent | percent }}</div>
+  </div>
+
+  <p>{{ finalPrice | currency : "EUR" : "symbol" }}</p>
+</div>

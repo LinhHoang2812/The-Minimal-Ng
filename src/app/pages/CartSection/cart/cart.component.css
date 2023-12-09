@@ -1,0 +1,154 @@
+.cart {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.cart-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #3333339c;
+  z-index: 250;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-section {
+  background-color: white;
+  padding: 2rem 4rem;
+  position: relative;
+  width: 80%;
+  height: 80%;
+  overflow-y: auto;
+}
+.single-product {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+.close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+}
+.close:hover {
+  font-weight: 600;
+}
+.cart-right {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.container {
+  background-color: white;
+  padding: 0 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.container img {
+  width: 150px;
+}
+.cart-right div {
+  background-color: white;
+}
+.cards {
+  padding: 0 1rem 2rem;
+}
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.cards img {
+  width: 50px;
+}
+.orders {
+  padding: 0 1rem 2rem;
+}
+.title {
+  font-size: 18px;
+  font-weight: bold;
+}
+.total-price {
+  text-align: right;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 2rem;
+}
+.order-btn {
+  width: 100%;
+  height: 50px;
+  background-color: black;
+  color: white;
+  font-family: Tenor Sans;
+  font-style: normal;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  border: none;
+  cursor: pointer;
+}
+.order-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.view-btn {
+  padding: 0 2rem;
+  background-color: black;
+  color: white;
+  font-family: Tenor Sans;
+  font-style: normal;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  border: none;
+  cursor: pointer;
+}
+.orders-small {
+  padding: 1rem;
+  gap: 0.5rem;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: white;
+  z-index: 500;
+  border-top: 1px solid rgb(200, 200, 200);
+}
+@media screen and (max-width: 768px) {
+  .cart {
+    display: block;
+  }
+  .cart-left {
+    gap: 1rem;
+  }
+  .view-btn {
+    font-size: 16px;
+    padding: 10px;
+    height: auto;
+  }
+  .order-btn {
+    padding: 5px;
+    width: fit-content;
+    font-size: 14px;
+    margin-right: 2rem;
+  }
+  .total-price {
+    font-size: 16px;
+    margin: 0;
+  }
+}

@@ -1,0 +1,95 @@
+.photos {
+  display: flex;
+  gap: 2rem;
+}
+
+.all-photos {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+}
+.img {
+  width: 60px;
+  height: 80px;
+  cursor: pointer;
+}
+.active {
+  border: solid 2.5px black;
+}
+.img img {
+  width: 100%;
+  height: 100%;
+}
+.main-photo {
+  max-width: 500px;
+  position: relative;
+  box-sizing: border-box;
+}
+.main-photo.product-form {
+  max-width: 370px;
+}
+.main-photo img {
+  width: 100%;
+  max-height: 700px;
+  object-fit: cover;
+}
+.carousel-slick {
+  padding: 0;
+}
+
+.next-slick,
+.prev-slick {
+  border: none;
+  padding: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: none;
+  background-color: rgba(128, 128, 128, 0.422);
+  cursor: pointer;
+}
+.prev-slick {
+  left: 0;
+}
+.next-slick {
+  right: 0;
+}
+.prev-slick .material-symbols-outlined {
+  color: white;
+  font-size: 30px;
+}
+
+.next-slick .material-symbols-outlined {
+  color: white;
+  font-size: 30px;
+}
+.main-photo:hover .next-slick {
+  display: flex;
+}
+.main-photo:hover .prev-slick {
+  display: flex;
+}
+@media screen and (max-width: 768px) {
+  .main-photo {
+    max-width: 100%;
+  }
+  .main-photo img {
+    max-height: 450px;
+    cursor: pointer;
+  }
+  .slide {
+    margin: 0 0.1rem;
+  }
+  .slide:focus {
+    outline: none;
+  }
+  .main-photo:hover .next-slick {
+    display: none;
+  }
+  .main-photo:hover .prev-slick {
+    display: none;
+  }
+}

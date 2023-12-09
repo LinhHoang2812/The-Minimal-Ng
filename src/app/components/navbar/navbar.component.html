@@ -1,0 +1,293 @@
+<nav
+  appNavAnnimation
+  [ngClass]="!(path | async) && 'color'"
+  (click)="setSearch($event)"
+>
+  <div class="navbar" [ngStyle]="{ zIndex: screen.isSearch ? '300' : '100' }">
+    <div class="nav-left">
+      <button *ngIf="lgScreen" mat-icon-button (click)="setSmallNavbar()">
+        <span class="material-symbols-outlined"> menu </span>
+      </button>
+      <app-logo></app-logo>
+    </div>
+
+    <div class="nav-right">
+      <button
+        *ngIf="!screen.isSearch"
+        (click)="setSearch($event)"
+        class="search-btn"
+      >
+        <span class="material-symbols-outlined"> search </span>
+      </button>
+      <form
+        *ngIf="screen.isSearch"
+        class="search-form"
+        [formGroup]="form"
+        (submit)="onSubmit()"
+      >
+        <input
+          type="text"
+          class="search-input"
+          autoFocus
+          name="query"
+          formControlName="query"
+        />
+        <button type="submit" class="submit-btn">
+          <span class="material-symbols-outlined"> search </span>
+        </button>
+      </form>
+      <div *ngIf="!lgScreen">
+        <button
+          [cdkMenuTriggerFor]="userMenu"
+          mat-icon-button
+          #menuTrigger="cdkMenuTriggerFor"
+          (mouseenter)="menuTrigger.open()"
+        >
+          <span class="material-symbols-outlined"> person </span>
+        </button>
+        <ng-template #userMenu>
+          <div class="example-menu" cdkMenu (mouseleave)="menuTrigger.close()">
+            <button
+              class="example-menu-item"
+              *ngIf="!(auth.user | async)"
+              routerLink="/login"
+            >
+              Log in
+            </button>
+            <button class="example-menu-item" cdkMenuItem routerLink="/user">
+              Profile
+            </button>
+            <button
+              class="example-menu-item"
+              cdkMenuItem
+              routerLink="/user/order"
+            >
+              Your Orders
+            </button>
+
+            <button
+              class="example-menu-item"
+              (click)="auth.logoutUser()"
+              *ngIf="auth.user | async"
+            >
+              Log out
+            </button>
+          </div>
+        </ng-template>
+      </div>
+
+      <!-- <button
+        *ngIf="!lgScreen && (auth.user | async)"
+        mat-icon-button
+        (click)="auth.logoutUser()"
+      >
+        <span class="material-symbols-outlined">logout</span>
+      </button> -->
+
+      <button
+        *ngIf="!lgScreen"
+        mat-icon-button
+        routerLink="/user/wishlist"
+        class="favorite"
+      >
+        <span class="material-symbols-outlined"> favorite </span>
+        <span class="sup" *ngIf="favoriteCount">{{ favoriteCount }}</span>
+      </button>
+
+      <button mat-icon-button routerLink="/cart" class="cart">
+        <span class="material-symbols-outlined"> shopping_bag </span>
+        <span class="sup" *ngIf="cartCount">{{ cartCount }}</span>
+      </button>
+    </div>
+  </div>
+  <div class="nav-center-container">
+    <div class="nav-center-bottom">
+      <div class="left-b">
+        <span
+          [routerLink]="['/products']"
+          [queryParams]="{ category: 'total' }"
+          *ngFor="let item of items"
+          (mouseover)="onHover(item.options)"
+          >{{ item.title }}</span
+        >
+      </div>
+      <div class="right-b">
+        <span>Blog</span>
+        <span>Collection</span>
+        <span>Event</span>
+      </div>
+    </div>
+    <div *ngIf="menu.value" class="nav-detail">
+      <mat-list role="list" class="menu-list">
+        <mat-list-item
+          [routerLink]="['/products']"
+          [queryParams]="{ category: item }"
+          class="menu-list-item"
+          role="listitem"
+          *ngFor="let item of menu | async"
+          >{{ item }}</mat-list-item
+        >
+      </mat-list>
+    </div>
+  </div>
+  <div class="overlay" *ngIf="screen.isSearch"></div>
+</nav>
+
+<nav class="small-nav" *ngIf="screen.isSmallNavbarOpen">
+  <div class="icon-container">
+    <button mat-icon-button (click)="setSmallNavbar()">
+      <span class="material-symbols-outlined"> close </span>
+    </button>
+  </div>
+
+  <div class="small-nav-center">
+    <div class="horizontal-scroll">
+      <cdk-virtual-scroll-viewport
+        orientation="horizontal"
+        itemSize="0"
+        class="horizontal-viewport"
+      >
+        <mat-chip *cdkVirtualFor="let item of navItems">{{ item }}</mat-chip>
+      </cdk-virtual-scroll-viewport>
+    </div>
+    <!-- <span>fashion</span>
+    <span>blog</span>
+    <span>collection</span> -->
+  </div>
+  <div class="small-nav-detail">
+    <cdk-accordion class="example-accordion">
+      <cdk-accordion-item
+        *ngFor="let item of items; let index = index"
+        #accordionItem="cdkAccordionItem"
+        class="example-accordion-item"
+        role="button"
+        tabindex="0"
+        [attr.id]="'accordion-header-' + index"
+        [attr.aria-expanded]="accordionItem.expanded"
+        [attr.aria-controls]="'accordion-body-' + index"
+      >
+        <div
+          class="example-accordion-item-header"
+          (click)="accordionItem.toggle()"
+        >
+          {{ item.title }}
+          <span
+            class="example-accordion-item-description material-symbols-outlined"
+          >
+            {{ accordionItem.expanded ? "expand_less" : "expand_more" }}
+          </span>
+        </div>
+        <div
+          class="example-accordion-item-body"
+          role="region"
+          [style.display]="accordionItem.expanded ? '' : 'none'"
+          [attr.id]="'accordion-body-' + index"
+          [attr.aria-labelledby]="'accordion-header-' + index"
+        >
+          <cdk-virtual-scroll-viewport
+            appendOnly
+            itemSize="0"
+            class="example-viewport .hidden_scrollbar"
+          >
+            <!-- <div *cdkVirtualFor="let item of items" class="example-item">{{item}}</div> -->
+            <span
+              *cdkVirtualFor="let item of items[index].options"
+              class="accordion-item-body-content"
+              [routerLink]="['/products']"
+              [queryParams]="{ category: item }"
+              (click)="setSmallNavbar()"
+            >
+              {{ item }}
+            </span>
+          </cdk-virtual-scroll-viewport>
+        </div>
+      </cdk-accordion-item>
+    </cdk-accordion>
+  </div>
+  <div class="small-nav-bottom">
+    <button mat-icon-button (click)="setSmallNavbar()" routerLink="/">
+      <span class="material-symbols-outlined"> home </span>
+    </button>
+
+    <button
+      mat-icon-button
+      (click)="setSmallNavbar()"
+      routerLink="/login"
+      *ngIf="!(auth.user | async)"
+    >
+      <span class="material-symbols-outlined"> person </span>
+    </button>
+    <button
+      mat-icon-button
+      (click)="setSmallNavbar()"
+      routerLink="/user"
+      *ngIf="auth.user | async"
+    >
+      <span class="material-symbols-outlined"> account_circle </span>
+    </button>
+    <button
+      mat-icon-button
+      (click)="setSmallNavbar()"
+      routerLink="/user/order"
+      *ngIf="auth.user | async"
+    >
+      <span class="material-symbols-outlined"> orders </span>
+    </button>
+    <button
+      mat-icon-button
+      (click)="auth.logoutUser()"
+      (click)="setSmallNavbar()"
+      *ngIf="auth.user | async"
+    >
+      <span class="material-symbols-outlined"> logout </span>
+    </button>
+
+    <button
+      mat-icon-button
+      routerLink="/user/wishlist"
+      (click)="setSmallNavbar()"
+    >
+      <span class="material-symbols-outlined"> favorite </span>
+    </button>
+  </div>
+</nav>
+
+<!-- <div class="nav-center">
+      <div class="left">
+        <span>Women</span>
+        <span>Man</span>
+        <span>Kid</span>
+      </div>
+      <div class="right">
+        <span>Blog</span>
+        <span>Collection</span>
+        <span>Event</span>
+        <span>Look book</span>
+      </div>
+    </div> -->
+<!-- <div class="social-container">
+    <button mat-icon-button>
+      <img src="../../../assets/icons/twitter.svg" />
+    </button>
+    <button mat-icon-button>
+      <img src="../../../assets/icons/instagram.svg" />
+    </button>
+    <button mat-icon-button>
+      <img src="../../../assets/icons/youtube.svg" />
+    </button>
+  </div> -->
+<!-- <div class="contact">
+      <span class="material-symbols-outlined icon">
+        <span class="material-symbols-outlined"> contact_support </span>
+      </span>
+      <span>info@themininal.com</span>
+    </div>
+    <div class="contact">
+      <span class="material-symbols-outlined icon">
+        <span class="material-symbols-outlined"> call </span>
+      </span>
+      <span>+39 123456789</span>
+    </div>
+    <div class="line">
+      <div></div>
+    </div> -->

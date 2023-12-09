@@ -1,0 +1,79 @@
+<section class="product-tab">
+  <mat-tab-group class="tab" #tab>
+    <mat-tab label="Description">
+      <div class="tab-container des">
+        <p>{{ description }}</p>
+      </div>
+    </mat-tab>
+    <mat-tab label="Size Guide">
+      <div class="tab-container table">
+        <div class="table-container">
+          <table cdk-table [dataSource]="dataSource" class="size-table">
+            <ng-container
+              cdkColumnDef="{{ column }}"
+              *ngFor="let column of displayedColumns"
+            >
+              <th cdk-header-cell *cdkHeaderCellDef>{{ column }}</th>
+              <td *cdkCellDef="let element">{{ element[column] }}</td>
+            </ng-container>
+
+            <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
+            <tr cdk-row *cdkRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</section>
+<!-- <ng-container cdkColumnDef="measure">
+            <th cdk-header-cell *cdkHeaderCellDef>Measure</th>
+            <td *cdkCellDef="let element">{{ element.measure }}</td>
+          </ng-container>
+
+         
+          <ng-container
+            *ngIf="this.dataSource?.data.value[0].chest"
+            cdkColumnDef="chest"
+          >
+            <th cdk-header-cell *cdkHeaderCellDef>Chest</th>
+            <td cdk-cell *cdkCellDef="let element">
+              {{ element.chest }}
+            </td>
+          </ng-container>
+        
+          <ng-container
+            *ngIf="this.dataSource?.data.value[0].waist"
+            cdkColumnDef="waist"
+          >
+            <th cdk-header-cell *cdkHeaderCellDef>Waist</th>
+            <td cdk-cell *cdkCellDef="let element">
+              {{ element.waist }}
+            </td>
+          </ng-container>
+
+         
+          <ng-container cdkColumnDef="length">
+            <th cdk-header-cell *cdkHeaderCellDef>Length</th>
+            <td cdk-cell *cdkCellDef="let element">{{ element.length }}</td>
+          </ng-container>
+
+         
+          <ng-container
+            *ngIf="this.dataSource?.data.value[0].shoulder"
+            cdkColumnDef="shoulder"
+          >
+            <th cdk-header-cell *cdkHeaderCellDef>Shoulder</th>
+            <td cdk-cell *cdkCellDef="let element">
+              {{ element.shoulder }}
+            </td>
+          </ng-container>
+         
+          <ng-container
+            *ngIf="this.dataSource?.data.value[0].hip"
+            cdkColumnDef="hip"
+          >
+            <th cdk-header-cell *cdkHeaderCellDef>Hip</th>
+            <td cdk-cell *cdkCellDef="let element">
+              {{ element.hip }}
+            </td>
+          </ng-container> -->

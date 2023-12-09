@@ -1,0 +1,110 @@
+<section class="payment">
+  <div class="payment-left">
+    <div class="container">
+      <h5 class="title">Invoice Adress</h5>
+
+      <div class="address-info">
+        <div>
+          <p>
+            {{ auth.addressInfo.value.name }}
+            {{ auth.addressInfo.value.lastName }}
+            {{ auth.addressInfo.value.phone }}
+          </p>
+          <p>{{ auth.addressInfo.value.address }}</p>
+          <p>
+            {{ auth.addressInfo.value.city }}
+            {{ auth.addressInfo.value.country }}
+          </p>
+        </div>
+        <!-- <button class="edit-btn" (click)="screen.isOpenAddressForm = true">
+          Edit Address
+        </button> -->
+      </div>
+    </div>
+    <div class="container">
+      <h5 class="title">Cart Info</h5>
+      <p *ngIf="paymentError" style="color: red; padding-bottom: 1rem">
+        {{ paymentError }} <br />
+        We could not process the payment, please try again
+      </p>
+      <form class="checkout-form">
+        <div>
+          <img [src]="firebaseAuth.paymentSelected.img" />
+        </div>
+        <div class="stripe-card" ngxStripeCardGroup>
+          <div class="stripe-element">
+            <label
+              >Card Number (Please use
+              {{ firebaseAuth.paymentSelected.number }})</label
+            >
+
+            <div class="stripe-container number">
+              <ngx-stripe-card-number></ngx-stripe-card-number>
+            </div>
+          </div>
+
+          <div class="stripe-element">
+            <label>Expired Date (any date in the future)</label>
+            <div class="stripe-container date">
+              <ngx-stripe-card-expiry></ngx-stripe-card-expiry>
+            </div>
+          </div>
+          <div class="stripe-element">
+            <label>Security Code (any 3 digits)</label>
+            <div class="stripe-container cvc">
+              <ngx-stripe-card-cvc></ngx-stripe-card-cvc>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="checkout-right">
+    <div class="checkout-order">
+      <h5 class="title">Orders Summary</h5>
+      <div class="price">
+        <p>Original Price:</p>
+        <p>{{ firebaseAuth.totalPrice | currency : "EUR" : "symbol" }}</p>
+      </div>
+      <div class="price">
+        <p>Shipping Price:</p>
+        <p>
+          {{
+            firebaseAuth.shippingSelected.price | currency : "EUR" : "symbol"
+          }}
+        </p>
+      </div>
+      <div class="price">
+        <p>Total Price:</p>
+        <p style="color: red; font-weight: bold; margin-bottom: 2rem">
+          {{
+            firebaseAuth.totalPrice + firebaseAuth.shippingSelected.price
+              | currency : "EUR" : "symbol"
+          }}
+        </p>
+      </div>
+
+      <button
+        type="button"
+        class="order-btn"
+        (click)="checkout()"
+        *ngIf="!mdScreen"
+      >
+        Pay Now
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="loader" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="orders-small" *ngIf="mdScreen">
+  <p class="total-price">
+    {{
+      firebaseAuth.totalPrice + firebaseAuth.shippingSelected.price
+        | currency : "EUR" : "symbol"
+    }}
+  </p>
+  <button type="button" class="order-btn" (click)="checkout()">Pay Now</button>
+</div>

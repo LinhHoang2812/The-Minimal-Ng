@@ -1,0 +1,17 @@
+.product-section {
+  padding: 3rem 6rem;
+}
+.single-product {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+@media screen and (max-width: 768px) {
+  .product-section {
+    padding: 2rem 0;
+  }
+  .single-product {
+    display: block;
+  }
+}

@@ -1,0 +1,88 @@
+@import url("https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css");
+
+.hero {
+  /* min-height: 80vh; */
+  /* height: 90vh; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+/* ::ng-deep .carousel-inner {
+  overflow: hidden;
+}
+::ng-deep .carousel-item {
+  position: relative;
+  float: left;
+  width: 100%;
+  margin-right: -100%;
+} */
+::ng-deep .carousel-caption {
+  top: 40%;
+  left: 7%;
+  text-align: left;
+  text-transform: uppercase;
+  line-height: 1.2;
+  font-size: 20px;
+  font-weight: bold;
+  padding-left: 100px;
+  transition: 500ms ease-out;
+}
+::ng-deep .carousel-caption h3 {
+  width: 200px;
+  font-size: 64px;
+  letter-spacing: 3px;
+  margin-top: 0;
+}
+.move-text + ::ng-deep .carousel-caption:nth-child(1) {
+  padding-left: 0;
+  transition: 300ms ease-in-out;
+}
+.move-text + ::ng-deep .carousel-caption {
+  padding-left: 0;
+  transition: 1500ms ease-in-out;
+}
+.slide-img {
+  width: 100%;
+  height: 800px;
+  object-fit: cover;
+  display: block;
+}
+::ng-deep .carousel-control-prev-icon {
+  width: 3rem;
+  height: 3rem;
+  transform: translate(-100%, 100%);
+}
+::ng-deep .carousel-control-next-icon {
+  width: 3rem;
+  height: 3rem;
+  transform: translate(100%, 100%);
+}
+@media screen and (max-width: 1024px) {
+  ::ng-deep .carousel-control-prev-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    transform: translate(-60%, 100%);
+  }
+  ::ng-deep .carousel-control-next-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    transform: translate(60%, 100%);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .slide-img {
+    height: 70vh;
+  }
+  ::ng-deep .carousel-control-prev-icon {
+    width: 2rem;
+    height: 2rem;
+    transform: translate(0);
+  }
+  ::ng-deep .carousel-control-next-icon {
+    width: 2rem;
+    height: 2rem;
+    transform: translate(0);
+  }
+}

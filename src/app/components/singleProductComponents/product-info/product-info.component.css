@@ -1,0 +1,41 @@
+:host {
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Tenor Sans;
+  font-style: normal;
+  letter-spacing: 2px;
+}
+p {
+  margin: 0;
+}
+h5 {
+  font-size: 18px;
+  margin-top: 0;
+  letter-spacing: 2px;
+}
+.product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.shipping-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.more-detail p {
+  color: rgb(49, 49, 49);
+  font-size: 16px;
+  cursor: pointer;
+}
+.more-detail p:focus {
+  outline: none;
+}
+.more-detail p:hover {
+  font-weight: 600;
+}
+@media screen and (max-width: 768px) {
+  .product-info {
+    padding: 1rem;
+  }
+}

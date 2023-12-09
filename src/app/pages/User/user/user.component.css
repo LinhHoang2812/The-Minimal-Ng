@@ -1,0 +1,38 @@
+.user {
+  padding: 2rem 4rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 5rem;
+  min-height: 40vh;
+}
+aside {
+  padding-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+p {
+  cursor: pointer;
+}
+p:hover {
+  font-weight: 600;
+}
+p:focus {
+  outline: none;
+}
+.active {
+  font-weight: 600;
+}
+
+@media screen and (max-width: 768px) {
+  .user {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 1rem;
+  }
+  h5,
+  p {
+    font-size: 14px;
+  }
+}

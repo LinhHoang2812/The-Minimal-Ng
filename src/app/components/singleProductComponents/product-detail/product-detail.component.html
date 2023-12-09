@@ -1,0 +1,29 @@
+<div class="product-detail">
+  <h5 class="brand">{{ brand }}</h5>
+  <p class="name">{{ name }}</p>
+  <p class="id">{{ id }}</p>
+  <div class="rating">
+    <p class="stars">
+      <span *ngFor="let star of stars" class="material-symbols-outlined fill">
+        star
+      </span>
+      <span *ngIf="!isRatingInterger" class="material-symbols-outlined">
+        star_half
+      </span>
+
+      <span *ngFor="let item of nonStars" class="material-symbols-outlined"
+        >star</span
+      >
+    </p>
+
+    <p>Reviews {{ reviewCount }}</p>
+  </div>
+
+  <p class="price" [ngClass]="sale ? 'sale' : ''">
+    <span *ngIf="sale">{{ salePrice | currency : "EUR" : "symbol" }}</span>
+    <span>
+      {{ price | currency : "EUR" : "symbol" }}
+    </span>
+    <span>{{ -(price - salePrice) / price | percent }}</span>
+  </p>
+</div>

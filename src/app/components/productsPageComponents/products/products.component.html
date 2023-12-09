@@ -1,0 +1,74 @@
+<section class="products grid" *ngIf="screen.view === 'grid'">
+  <article *ngFor="let item of firebase.products" class="product">
+    <img src="{{ item.images[0] }}" alt="" />
+    <div class="info" [routerLink]="['/products', item.id]">
+      <p>{{ item.brand }}</p>
+      <p>
+        {{
+          item.sale
+            ? (item.salePrice | currency : "EUR" : "symbol")
+            : (item.price | currency : "EUR" : "symbol")
+        }}
+      </p>
+    </div>
+    <div class="hover-info" [routerLink]="['/products', item.id]">
+      <div class="color-container">
+        <div
+          *ngFor="let color of item.color"
+          class="color"
+          [ngStyle]="{ backgroundColor: color.replace(' ', '') }"
+        ></div>
+      </div>
+      <p class="name">{{ item.name }}</p>
+      <div class="size-container">
+        <span *ngFor="let size of item.size">{{ size }}</span>
+      </div>
+    </div>
+    <span class="sale" *ngIf="item.sale">Sale</span>
+    <span
+      class="material-symbols-outlined heart"
+      [ngClass]="favoriteList?.includes(item.id) ? 'favorite' : ''"
+      (click)="addWish(item.id)"
+    >
+      favorite
+    </span>
+  </article>
+</section>
+
+<section class="products list" *ngIf="screen.view === 'list'">
+  <article *ngFor="let item of firebase.products" class="list-product">
+    <div class="list-img">
+      <!-- <img src="{{ item.images[0] }}" alt="" /> -->
+      <img cImg fluid src="{{ item.images[0] }}" />
+      <span class="material-symbols-outlined heart" (click)="addWish(item.id)">
+        favorite
+      </span>
+    </div>
+
+    <span class="sale" *ngIf="item.sale">Sale</span>
+
+    <div class="list-info">
+      <h5>{{ item.brand }}</h5>
+      <p [routerLink]="['/products', item.id]" class="name">{{ item.name }}</p>
+
+      <p>
+        {{
+          item.sale
+            ? (item.salePrice | currency : "EUR" : "symbol")
+            : (item.price | currency : "EUR" : "symbol")
+        }}
+      </p>
+      <div class="color-container">
+        <div
+          *ngFor="let color of item.color"
+          class="color"
+          [ngStyle]="{ backgroundColor: color.replace(' ', '') }"
+        ></div>
+      </div>
+      <div class="size-container">
+        <div class="size" *ngFor="let size of item.size">{{ size }}</div>
+      </div>
+      <p *ngIf="!lgScreen">{{ item.des.slice(0, 140) }}...</p>
+    </div>
+  </article>
+</section>

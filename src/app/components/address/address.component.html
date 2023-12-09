@@ -1,0 +1,72 @@
+<div class="overlay">
+  <form class="form" [formGroup]="form" (submit)="onSubmit()">
+    <h5>Shipping Address</h5>
+    <span
+      class="material-symbols-outlined close"
+      (click)="screen.isOpenAddressForm = false"
+    >
+      close
+    </span>
+    <div class="form-content">
+      <input
+        type="text"
+        placeholder="Name"
+        class="form-input"
+        name="name"
+        formControlName="name"
+      />
+      <!-- <p
+    class="warning"
+    *ngIf="!form.get('email').valid && form.get('email').touched"
+  >
+    Please insert correct email
+  </p> -->
+      <input
+        type="text"
+        placeholder="Last name"
+        class="form-input"
+        name="lastName"
+        formControlName="lastName"
+      />
+      <!-- <p
+    class="warning"
+    *ngIf="!form.get('password').valid && form.get('password').touched"
+  >
+    Please insert your password
+  </p> -->
+      <input
+        type="text"
+        placeholder="Phone"
+        class="form-input"
+        name="phone"
+        formControlName="phone"
+      />
+
+      <input
+        type="text"
+        placeholder="Address"
+        class="form-input"
+        name="address"
+        formControlName="address"
+      />
+      <input
+        type="text"
+        placeholder="Country"
+        class="form-input"
+        name="country"
+        formControlName="country"
+      />
+      <input
+        type="text"
+        placeholder="City"
+        class="form-input"
+        name="city"
+        formControlName="city"
+      />
+    </div>
+
+    <button type="submit" class="submit-btn">
+      {{ auth.addressInfo.value ? "Edit address" : "Add Address" }}
+    </button>
+  </form>
+</div>
