@@ -39,6 +39,8 @@ export class ProductFormComponent {
   mdScreen: boolean;
   miniImage: string;
   timeOut: any;
+  favoriteList: FavoriteItem[];
+  favoriteProducts: string[];
 
   constructor(
     private firebase: FirebaseServiceService,
@@ -71,42 +73,36 @@ export class ProductFormComponent {
             : 1;
         }
       });
-    if (this.auth.user.value) {
-      //check to see if the product is already in favorite list
-      if (changes['id'].currentValue) {
-        this.firebaseAuth.getFavorite().subscribe((data: FavoriteItem[]) => {
-          this.isProductFavorite = data
-            .map((item) => item.product_id)
-            .includes(changes['id'].currentValue);
+    // if (this.auth.user.value) {
+    //   if (changes['id'].currentValue) {
+    //     this.firebaseAuth.getFavorite().subscribe((data: FavoriteItem[]) => {
+    //       this.isProductFavorite = data
+    //         .map((item) => item.product_id)
+    //         .includes(changes['id'].currentValue);
 
-          const favoriteItem = data.find(
-            (item) => item.product_id === changes['id'].currentValue
-          );
-          this.favoriteId = favoriteItem?.id;
-        });
-      }
-    }
+    //       const favoriteItem = data.find(
+    //         (item) => item.product_id === changes['id'].currentValue
+    //       );
+
+    //       this.favoriteId = favoriteItem?.id;
+    //     });
+    //   }
+    // }
   }
   ngOnInit() {
-    // this.firebase.product.subscribe((value: SingleProduct) => {
-    //   if (value) {
-    //     this.colors = value.color;
-    //     this.sizes = value.size;
-    //     this.finalPrice = value.sale ? value.salePrice : value.price;
-    //     this.colorValue = this.screen.isEditProductForm
-    //       ? this.firebaseAuth.editColor
-    //       : this.colors[0];
-    //     this.quantityValue = this.screen.isEditProductForm
-    //       ? this.firebaseAuth.editQuantity
-    //       : 1;
-    //     this.sizeValue = this.screen.isEditProductForm
-    //       ? this.firebaseAuth.editSize
-    //       : null;
-    //   }
-    // });
     this.screen.mdScreen().subscribe((value: any) => {
       this.mdScreen = value;
     });
+    if (this.auth.user.value?.token) {
+      this.firebaseAuth.isFavoriteChange.subscribe((value) => {
+        this.firebaseAuth
+          .getFavorite()
+          .subscribe((data: FavoriteItem[] | null) => {
+            this.favoriteList = data;
+            this.favoriteProducts = data?.map((item) => item.product_id);
+          });
+      });
+    }
   }
   setColor(value: string) {
     this.colorValue = value;
@@ -116,17 +112,29 @@ export class ProductFormComponent {
     this.quantityValue = this.quantityValue + 1;
   }
   remove() {
-    if (this.quantityValue > 0) {
+    if (this.quantityValue > 1) {
       this.quantityValue = this.quantityValue - 1;
     }
   }
   addWish() {
     if (this.auth.user.value?.token) {
-      if (this.isProductFavorite) {
-        this.firebaseAuth.deleteFavorite(this.favoriteId).subscribe({
+      // if (this.isProductFavorite) {
+      //   this.firebaseAuth.deleteFavorite(this.favoriteId).subscribe({
+      //     next: () => {
+      //       this.firebaseAuth.isFavoriteChange.next(true);
+      //       this.isProductFavorite = false;
+      //     },
+      //   });
+      //   return;
+      // }
+
+      if (this.favoriteProducts.includes(this.id)) {
+        const favorite_id: string = this.favoriteList.find(
+          (item) => item.product_id === this.id
+        )?.id;
+        this.firebaseAuth.deleteFavorite(favorite_id).subscribe({
           next: () => {
             this.firebaseAuth.isFavoriteChange.next(true);
-            this.isProductFavorite = false;
           },
         });
         return;
@@ -138,7 +146,6 @@ export class ProductFormComponent {
         .subscribe({
           next: () => {
             this.firebaseAuth.isFavoriteChange.next(true);
-            this.isProductFavorite = true;
           },
         });
     } else {

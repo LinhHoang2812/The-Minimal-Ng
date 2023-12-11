@@ -34,7 +34,7 @@
           [ngClass]="screen.isSizeMenuOpen === true ? 'menu-open' : ''"
         >
           <div class="menu-listbox-label">
-            <span>
+            <span class="expand-more">
               {{
                 screen.isSizeMenuOpen === true
                   ? "Select size"
@@ -43,7 +43,9 @@
                   : "Select size "
               }}
             </span>
-            <span class="material-symbols-outlined"> expand_more </span>
+            <span class="material-symbols-outlined expand-more">
+              expand_more
+            </span>
           </div>
           <ul
             *ngIf="screen.isSizeMenuOpen"
@@ -89,7 +91,10 @@
   </div>
   <div *ngIf="!screen.isEditProductForm" class="btn-container">
     <button type="submit" class="cart-btn" #cartBtn>Add to cart</button>
-    <div class="wish-btn" [ngClass]="isProductFavorite ? 'in-wishlist' : ''">
+    <div
+      class="wish-btn"
+      [ngClass]="favoriteProducts?.includes(id) ? 'in-wishlist' : ''"
+    >
       <span class="material-symbols-outlined" (click)="addWish()">
         favorite
       </span>

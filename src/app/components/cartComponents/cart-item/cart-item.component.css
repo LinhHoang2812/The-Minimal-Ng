@@ -9,6 +9,7 @@
   display: grid;
   flex-direction: 1fr;
   align-items: flex-start;
+  gap: 0.5rem;
 }
 .bottom-info {
   align-self: flex-end;
@@ -18,7 +19,7 @@
   align-items: center;
 }
 .cart-img {
-  height: 180px;
+  height: 190px;
 }
 .cart-item img {
   width: 100%;

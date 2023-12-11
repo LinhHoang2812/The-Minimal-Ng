@@ -27,7 +27,10 @@ export class SingleProductPageComponent {
     });
   }
   setSizeMenu = (e: any) => {
-    if (e.target.classList.contains('menu-listbox-label')) {
+    if (
+      e.target.classList.contains('menu-listbox-label') ||
+      e.target.classList.contains('expand-more')
+    ) {
       this.screen.isSizeMenuOpen =
         this.screen.isSizeMenuOpen === true ? false : true;
     } else {

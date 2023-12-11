@@ -1,5 +1,12 @@
+import { CdkMenuTrigger } from '@angular/cdk/menu';
 import { Location } from '@angular/common';
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
@@ -15,6 +22,7 @@ import { ScreenServiceService } from 'src/app/service/screen-service.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
+  @ViewChild('userBtn') userBtn: ElementRef;
   favoriteCount: number;
   cartCount: number;
   menu = new BehaviorSubject<string[]>(null);
@@ -110,6 +118,15 @@ export class NavbarComponent implements OnInit {
       queryParams: { query: this.form.value.query },
     };
     this.router.navigate(['/products'], navigationExtras);
+  }
+  handleMouseLeave(e: any, menuTrigger: CdkMenuTrigger) {
+    const left = this.userBtn.nativeElement.getBoundingClientRect().left;
+    const right = this.userBtn.nativeElement.getBoundingClientRect().right;
+    const top = this.userBtn.nativeElement.getBoundingClientRect().top;
+
+    if (e.clientX < left || e.clientX > right || e.clientY < top) {
+      menuTrigger.close();
+    }
   }
 }
 // e.target.classList.contains('material-symbols-outlined') ||
